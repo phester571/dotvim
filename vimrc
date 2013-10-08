@@ -74,18 +74,6 @@ vnoremap <tab> %
 
 nnoremap <leader><tab> :Scratch<cr>
 
-"inoremap  <Up>     <NOP>
-"inoremap  <Down>   <NOP>
-"inoremap  <Left>   <NOP>
-"inoremap  <Right>  <NOP>
-"noremap   <Up>     <NOP>
-"noremap   <Down>   <NOP>
-"noremap   <Left>   <NOP>
-"noremap   <Right>  <NOP>
-
-"auto save when focus is lost
-"au FocusLost * :wa
-
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
@@ -156,7 +144,8 @@ autocmd FileType python map <F8> iimport pdb;pdb.set_trace()<CR>
 autocmd FileType perl imap <F5> <Esc>:w<CR>:!perl "%"<CR>
 autocmd FileType perl map <F5> :w<CR>:!perl "%"<CR>
 
-nmap ,n :NERDTreeClose<CR>:NERDTreeToggle<CR>
+"nmap ,n :NERDTreeClose<CR>:NERDTreeToggle<CR>
+nmap ,n :NERDTreeToggle<CR>
 nmap ,m :NERDTreeClose<CR>:NERDTreeFind<CR>
 nmap ,N :NERDTreeClose<CR>
 
