@@ -41,6 +41,7 @@ set laststatus=2
 "set relativenumber
 set number
 set noswapfile
+set statusline=%f\ %m%R\ \ %{fugitive#statusline()}%=%l/%L\ [%v]\ %P
 
 set tabstop=4
 set shiftwidth=4
