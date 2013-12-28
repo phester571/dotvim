@@ -1,4 +1,5 @@
 execute pathogen#infect()
+execute pathogen#incubate()
 execute pathogen#helptags()
 
 set nocompatible
@@ -11,7 +12,8 @@ nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 set hidden
-set nowrap
+"set nowrap
+set wrap
 set tabstop=4
 set backspace=indent,eol,start
 set autoindent
@@ -52,8 +54,6 @@ filetype on
 filetype plugin on
 filetype indent on
 
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-
 "colorscheme mustang
 ""colorscheme hybrid
 colorscheme desert
@@ -78,7 +78,10 @@ nnoremap <leader><tab> :Scratch<cr>
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
-autocmd filetype html,xml set listchars-=tab:>.
+augroup filetype_html_xml
+    autocmd!
+    autocmd filetype html,xml set listchars-=tab:>.
+augroup END
 
 set pastetoggle=<F2>
 
@@ -92,6 +95,7 @@ map <C-l> <C-w>l
 map <C-q> <C-w>q
 nnoremap <leader>w <C-w>v<C-w>l
 
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 
 cmap w!! w !sudo tee % >/dev/null
 
@@ -101,7 +105,10 @@ let _dir = expand("%:p:h")
     exec "cd " . _dir
     unlet _dir
 endfunction
-autocmd BufEnter * call CHANGE_CURR_DIR()
+augroup buff_enter
+    autocmd!
+    autocmd BufEnter * call CHANGE_CURR_DIR()
+augroup END
 
 "nmap <C-N> :bn<cr>
 "nmap <C-P> :bp<cr>
@@ -127,23 +134,30 @@ vmap <C-Up> :m'<-2<CR>gv=gv
 vmap <C-Right> >gv 
 vmap <C-Left> <gv
 
-" Map F5 to execute a Python script
-autocmd FileType python imap <F5> <Esc>:w<CR>:!python "%"<CR>
-autocmd FileType python map <F5> :w<CR>:!python "%"<CR>
-" Map F6 to execute a Python script interactively
-autocmd FileType python imap <F6> <Esc>:w<CR>:!python -i "%"<CR>
-autocmd FileType python map <F6> :w<CR>:!python -i "%"<CR>
-" Map F7 to run a Python shell
-autocmd FileType python imap <F7> <Esc>:!ipython<CR>
-autocmd FileType python map <F7> :!ipython<CR>
+:augroup filetype_python
+    autocmd!
+    autocmd FileType python set omnifunc=pythoncomplete#Complete
+    " Map F5 to execute a Python script
+    autocmd FileType python imap <F5> <Esc>:w<CR>:!python "%"<CR>
+    autocmd FileType python map <F5> :w<CR>:!python "%"<CR>
+    " Map F6 to execute a Python script interactively
+    autocmd FileType python imap <F6> <Esc>:w<CR>:!python -i "%"<CR>
+    autocmd FileType python map <F6> :w<CR>:!python -i "%"<CR>
+    " Map F7 to run a Python shell
+    autocmd FileType python imap <F7> <Esc>:!ipython<CR>
+    autocmd FileType python map <F7> :!ipython<CR>
 
-" Map F8 to insert a breakpoint
-autocmd FileType python imap <F8> import pdb;pdb.set_trace()
-autocmd FileType python map <F8> iimport pdb;pdb.set_trace()<CR>
+    " Map F8 to insert a breakpoint
+    autocmd FileType python imap <F8> import pdb;pdb.set_trace()
+    autocmd FileType python map <F8> iimport pdb;pdb.set_trace()<CR>
+augroup END
 
-" Map F5 to execute a Perl script
-autocmd FileType perl imap <F5> <Esc>:w<CR>:!perl "%"<CR>
-autocmd FileType perl map <F5> :w<CR>:!perl "%"<CR>
+augroup filetype_perl
+    autocmd!
+    " Map F5 to execute a Perl script
+    autocmd FileType perl imap <F5> <Esc>:w<CR>:!perl "%"<CR>
+    autocmd FileType perl map <F5> :w<CR>:!perl "%"<CR>
+augroup END
 
 "nmap ,n :NERDTreeClose<CR>:NERDTreeToggle<CR>
 nmap ,n :NERDTreeToggle<CR>
