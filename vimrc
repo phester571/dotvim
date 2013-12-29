@@ -199,7 +199,6 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
 "let Tlist_Ctags_Cmd = 'C:\Utilities\ctags58\ctags.exe'
-
 nmap :tlist :TlistToggle
 
 if has("autocmd")
