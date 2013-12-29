@@ -12,7 +12,6 @@ nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 set hidden
-"set nowrap
 set wrap
 set tabstop=4
 set backspace=indent,eol,start
