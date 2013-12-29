@@ -75,6 +75,15 @@ vnoremap <tab> %
 
 nnoremap <leader><tab> :Scratch<cr>
 
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap il( :<c-u>normal! F)vi(<cr>
+
+onoremap in[ :<c-u>normal! f[vi[<cr>
+onoremap il[ :<c-u>normal! F]vi[<cr>
+
+onoremap in{ :<c-u>normal! f{vi{<cr>
+onoremap il{ :<c-u>normal! F}vi{<cr>
+
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 
