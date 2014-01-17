@@ -204,3 +204,33 @@ nmap :tlist :TlistToggle
 if has("autocmd")
     filetype plugin indent on
 endif
+
+" Swap default ':', '/' and '?' with cmdline-window equivalent.
+nnoremap : q:
+xnoremap : q:
+nnoremap / q/
+xnoremap / q/
+nnoremap ? q?
+xnoremap ? q?
+nnoremap q: :
+xnoremap q: :
+nnoremap q/ /
+xnoremap q/ /
+nnoremap q? ?
+xnoremap q? ?
+
+set cmdwinheight=3
+
+augroup command_window
+    autocmd!
+    " Have <Ctrl-C> leave the cmdline-window
+    autocmd CmdwinEnter * nnoremap <buffer> <C-c> :q\|echo ""<cr>
+    autocmd CmdwinEnter * inoremap <buffer> <C-c> <esc>:q\|echo ""<cr>
+
+    " Start command line window in insert mode and no line numbers
+    autocmd CmdwinEnter * startinsert
+    autocmd CmdwinEnter * set nonumber
+    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|exe "normal g'\"" |endif
+
+augroup END
+
