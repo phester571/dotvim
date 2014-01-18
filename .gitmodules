@@ -14,8 +14,15 @@
 	path = bundle/snippets
 	url = https://github.com/scrooloose/snipmate-snippets.git
 [submodule "bundle/scratch.vim"]
+
 	path = bundle/scratch.vim
+
 	url = https://github.com/vim-scripts/scratch.vim.git
+
 [submodule "bundle/snipmate.vim"]
+
 	path = bundle/snipmate.vim
+
 	url = https://github.com/msanders/snipmate.vim.git
+
+	ignore = dirty
