@@ -199,7 +199,7 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
 "let Tlist_Ctags_Cmd = 'C:\Utilities\ctags58\ctags.exe'
-nmap :tlist :TlistToggle
+nmap <leader>t :TlistToggle<CR>
 
 if has("autocmd")
     filetype plugin indent on
@@ -231,6 +231,5 @@ augroup command_window
     autocmd CmdwinEnter * startinsert
     autocmd CmdwinEnter * set nonumber
     autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|exe "normal g'\"" |endif
-
 augroup END
 
