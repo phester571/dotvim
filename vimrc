@@ -66,8 +66,15 @@ set ignorecase
 set smartcase
 set gdefault
 set incsearch
+set hlsearch
 set showmatch
-"set hlsearch
+
+augroup insert_hlsearch
+    autocmd!
+    autocmd InsertEnter * :setlocal nohlsearch
+    autocmd InsertLeave * :setlocal hlsearch
+augroup END
+
 nnoremap <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
@@ -97,7 +104,7 @@ vmap Q gq
 nmap Q gqap
 
 map <C-h> <C-w>h
-map <C-x> <C-w>x
+map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 map <C-q> <C-w>q
@@ -113,6 +120,7 @@ let _dir = expand("%:p:h")
     exec "cd " . _dir
     unlet _dir
 endfunction
+
 augroup buff_enter
     autocmd!
     autocmd BufEnter * call CHANGE_CURR_DIR()
@@ -219,7 +227,7 @@ xnoremap q/ /
 nnoremap q? ?
 xnoremap q? ?
 
-set cmdwinheight=3
+set cmdwinheight=4
 
 augroup command_window
     autocmd!
@@ -233,3 +241,7 @@ augroup command_window
     autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|exe "normal g'\"" |endif
 augroup END
 
+nnoremap ; :
+nnoremap <Space> :wa<Enter>
+nnoremap <Enter> o<Esc>
+nnoremap <S-Enter> O<Esc>
