@@ -49,6 +49,8 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
+set nocp
+
 filetype on
 filetype plugin on
 filetype indent on
@@ -209,6 +211,8 @@ let g:miniBufExplModSelTarget = 1
 "let Tlist_Ctags_Cmd = 'C:\Utilities\ctags58\ctags.exe'
 nmap <leader>t :TlistToggle<CR>
 
+map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+
 if has("autocmd")
     filetype plugin indent on
 endif
@@ -216,16 +220,16 @@ endif
 " Swap default ':', '/' and '?' with cmdline-window equivalent.
 nnoremap : q:
 xnoremap : q:
-nnoremap / q/
-xnoremap / q/
-nnoremap ? q?
-xnoremap ? q?
-nnoremap q: :
-xnoremap q: :
-nnoremap q/ /
-xnoremap q/ /
-nnoremap q? ?
-xnoremap q? ?
+"nnoremap / q/
+"xnoremap / q/
+"nnoremap ? q?
+"xnoremap ? q?
+"nnoremap q: :
+"xnoremap q: :
+"nnoremap q/ /
+"xnoremap q/ /
+"nnoremap q? ?
+"xnoremap q? ?
 
 set cmdwinheight=4
 
@@ -245,3 +249,23 @@ nnoremap ; :
 nnoremap <Space> :wa<Enter>
 nnoremap <Enter> o<Esc>
 nnoremap <S-Enter> O<Esc>
+
+
+" Tab function from Hacking Vim by Kim Shulz
+" If no completion, insert tab.
+" Else check if an omnifunction
+function! SuperCleverTab()
+    if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
+        return "\<Tab>"
+    else
+        if &omnifunc != ''
+            return "\<C-X>\<C-O>"
+        elseif &dictionary != ''
+            return "\<C-K>"
+        else
+            return "\<C-N>"
+        endif
+    endif
+endfunction
+
+inoremap <Tab> <C-R>=SuperCleverTab()<cr>
