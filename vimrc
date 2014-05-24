@@ -209,7 +209,8 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
 "let Tlist_Ctags_Cmd = 'C:\Utilities\ctags58\ctags.exe'
-nmap <leader>t :TlistToggle<CR>
+"nmap <leader>t :TlistToggle<CR>
+nmap <leader>t :TagbarToggle<CR>
 
 map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
