@@ -13,5 +13,5 @@ Load submodules:
 	git submodule update
 
 Update all submodules:
-    cd ~/.vim
-    git submodule foreach git pull origin master
+	cd ~/.vim
+	git submodule foreach git pull origin master
