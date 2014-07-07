@@ -183,6 +183,8 @@ augroup filetype_perl
     autocmd FileType perl map <F5> :w<CR>:!perl "%"<CR>
 augroup END
 
+let g:flake8_max_line_length=99
+
 "nmap ,n :NERDTreeClose<CR>:NERDTreeToggle<CR>
 nmap ,n :NERDTreeToggle<CR>
 nmap ,m :NERDTreeClose<CR>:NERDTreeFind<CR>
