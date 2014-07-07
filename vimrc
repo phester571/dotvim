@@ -155,6 +155,9 @@ vmap <C-Left> <gv
 :augroup filetype_python
     autocmd!
     autocmd FileType python set omnifunc=pythoncomplete#Complete
+    " Map F3 to execute a Python script using Python 3.4
+    autocmd FileType python imap <F3> <Esc>:w<CR>:!C:\Python34\python.exe "%"<CR>
+    autocmd FileType python map <F3> :w<CR>:!C:\Python34\python.exe "%"<CR>
     " Map F5 to execute a Python script
     autocmd FileType python imap <F5> <Esc>:w<CR>:!python "%"<CR>
     autocmd FileType python map <F5> :w<CR>:!python "%"<CR>
@@ -168,6 +171,9 @@ vmap <C-Left> <gv
     " Map F8 to insert a breakpoint
     autocmd FileType python imap <F8> import pdb;pdb.set_trace()
     autocmd FileType python map <F8> iimport pdb;pdb.set_trace()<CR>
+
+    " Map leader8 to vim-flake8
+    autocmd FileType python map <leader>8 :call Flake8()<CR>
 augroup END
 
 augroup filetype_perl
@@ -272,3 +278,11 @@ function! SuperCleverTab()
 endfunction
 
 inoremap <Tab> <C-R>=SuperCleverTab()<cr>
+
+" Map Alt-(j/k) to move line/blocks of lines up or down
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
