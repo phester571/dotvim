@@ -288,3 +288,7 @@ inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
+
+set ts=4 sw=4 et
+"let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
