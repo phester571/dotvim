@@ -12,7 +12,7 @@ nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 set hidden
-set wrap
+set nowrap
 set tabstop=4
 set backspace=indent,eol,start
 set autoindent
@@ -36,10 +36,10 @@ set showcmd
 set cursorline
 set wildmode=list:longest
 set path+=**
-set scrolloff=5
-"set ruler
+set scrolloff=8
+set ruler
 set laststatus=2
-"set relativenumber
+set relativenumber
 set number
 set noswapfile
 set statusline=%f\ %m%R\ \ %{fugitive#statusline()}%=%l/%L\ [%v]\ %P
@@ -50,6 +50,48 @@ set softtabstop=4
 set expandtab
 
 set nocp
+set clipboard=unnamed
+
+" Open new splits below and to the right
+"set splitbelow
+set splitright
+
+" Faster split resizing (+,-) {{{
+if bufwinnr(1)
+    map <S-Up> <C-W>+
+    map <S-Down> <C-W>-
+    map <S-Left> <C-W><
+    map <S-Right> <C-W>>
+endif
+" }}}
+
+" Better split switching (Ctrl-j, Ctrl-k, Ctrl-h, Ctrl-l) {{{
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-H> <C-W>h
+map <C-L> <C-W>l
+" }}}
+
+" Auto resize Vim splits to active split
+"set winwidth=100
+"set winheight=5
+"set winminheight=5
+"set winheight=80
+
+"Toggle relative numbering, and set to absolute on loss of focus or insert mode
+set rnu
+function! ToggleNumbersOn()
+    set rnu!
+    set nu
+endfunction
+function! ToggleRelativeOn()
+    set nu!
+    set rnu
+endfunction
+autocmd FocusLost * call ToggleNumbersOn()
+autocmd FocusGained * call ToggleRelativeOn()
+autocmd InsertEnter * call ToggleNumbersOn()
+autocmd InsertLeave * call ToggleRelativeOn()
 
 filetype on
 filetype plugin on
@@ -123,10 +165,10 @@ let _dir = expand("%:p:h")
     unlet _dir
 endfunction
 
-augroup buff_enter
-    autocmd!
-    autocmd BufEnter * call CHANGE_CURR_DIR()
-augroup END
+"augroup buff_enter
+    "autocmd!
+    "autocmd BufEnter * call CHANGE_CURR_DIR()
+"augroup END
 
 "nmap <C-N> :bn<cr>
 "nmap <C-P> :bp<cr>
@@ -261,6 +303,9 @@ nnoremap <Space> :wa<Enter>
 nnoremap <Enter> o<Esc>
 nnoremap <S-Enter> O<Esc>
 
+" Yank from cursor to end of line {{{
+nnoremap Y y$
+" }}}
 
 " Tab function from Hacking Vim by Kim Shulz
 " If no completion, insert tab.
