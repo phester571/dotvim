@@ -36,7 +36,7 @@ set showcmd
 set cursorline
 set wildmode=list:longest
 set path+=**
-set scrolloff=8
+set scrolloff=5
 set ruler
 set laststatus=2
 set relativenumber
@@ -193,6 +193,10 @@ vmap <C-Up> :m'<-2<CR>gv=gv
 " move the selected block left or right 
 vmap <C-Right> >gv 
 vmap <C-Left> <gv
+
+" map jk and kj to <Esc> in insert mode
+inoremap jk <Esc>
+inoremap kj <Esc>
 
 :augroup filetype_python
     autocmd!
